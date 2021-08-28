@@ -13,6 +13,8 @@
 		BE39F4E526D9035600912C5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E326D9035600912C5F /* Main.storyboard */; };
 		BE39F4E726D9035C00912C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E626D9035C00912C5F /* Assets.xcassets */; };
 		BE39F4EA26D9035C00912C5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */; };
+		BEF364A426DA54230030BB67 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A326DA54230030BB67 /* Constants.swift */; };
+		BEF364A726DA54540030BB67 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A626DA54540030BB67 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		BE39F4E626D9035C00912C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE39F4E926D9035C00912C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE39F4EB26D9035C00912C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEF364A326DA54230030BB67 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BEF364A626DA54540030BB67 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				BE39F4E626D9035C00912C5F /* Assets.xcassets */,
 				BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */,
 				BE39F4EB26D9035C00912C5F /* Info.plist */,
+				BEF364A326DA54230030BB67 /* Constants.swift */,
+				BEF364A626DA54540030BB67 /* Extensions.swift */,
 			);
 			path = CityWeather;
 			sourceTree = "<group>";
@@ -137,9 +143,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF364A726DA54540030BB67 /* Extensions.swift in Sources */,
 				BE39F4E226D9035600912C5F /* ViewController.swift in Sources */,
 				BE39F4DE26D9035600912C5F /* AppDelegate.swift in Sources */,
 				BE39F4E026D9035600912C5F /* SceneDelegate.swift in Sources */,
+				BEF364A426DA54230030BB67 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +304,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.okoroezenwa.CityWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -315,7 +323,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.okoroezenwa.CityWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
