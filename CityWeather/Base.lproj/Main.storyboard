@@ -59,18 +59,26 @@
                                                     <state key="normal" image="Location"/>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Location or Zip Code" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4cP-eD-AZY">
-                                                    <rect key="frame" x="8" y="0.0" width="366" height="50"/>
+                                                    <rect key="frame" x="8" y="0.0" width="310" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="location"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2A-Y6-CCW">
-                                                    <rect key="frame" x="382" y="0.0" width="0.0" height="50"/>
+                                                    <rect key="frame" x="326" y="0.0" width="56" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="56" id="OtO-7O-8gG"/>
+                                                    </constraints>
                                                     <state key="normal" title="Go!"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XKZ-WU-KcZ" firstAttribute="width" secondItem="K2A-Y6-CCW" secondAttribute="width" id="LNf-8s-aaf"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="LNf-8s-aaf"/>
+                                                </mask>
+                                            </variation>
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -141,6 +149,7 @@
                         <outlet property="bottomEffectView" destination="CIm-oL-dTu" id="JE8-7n-S7c"/>
                         <outlet property="bottomEffectViewBottomConstraint" destination="ADT-T1-CmQ" id="IIP-jP-tmG"/>
                         <outlet property="dateLabel" destination="8yV-nK-ikS" id="wmo-rC-eZa"/>
+                        <outlet property="goButton" destination="K2A-Y6-CCW" id="BdR-VX-pd7"/>
                         <outlet property="textField" destination="4cP-eD-AZY" id="eEk-fZ-Uad"/>
                         <outlet property="weatherLabel" destination="9VQ-gp-twS" id="jPD-vb-DKf"/>
                     </connections>

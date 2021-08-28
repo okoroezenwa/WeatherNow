@@ -17,6 +17,13 @@ class ViewController: UIViewController {
     @IBOutlet var textField: UITextField!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var weatherLabel: UILabel!
+    @IBOutlet var goButton: UIButton! {
+        
+        didSet {
+            
+            goButton.addTarget(self, action: #selector(getCurrentWeatherConditions), for: .touchUpInside)
+        }
+    }
     
     // MARK: - Overridden Properties
     
@@ -82,6 +89,11 @@ class ViewController: UIViewController {
             prepareBackground()
             prepareVisualEffectView()
         }
+    }
+    
+    @objc func getCurrentWeatherConditions() {
+        
+        
     }
 }
 
