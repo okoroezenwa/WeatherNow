@@ -13,8 +13,12 @@
 		BE39F4E526D9035600912C5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E326D9035600912C5F /* Main.storyboard */; };
 		BE39F4E726D9035C00912C5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E626D9035C00912C5F /* Assets.xcassets */; };
 		BE39F4EA26D9035C00912C5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */; };
+		BE575F7126DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */; };
+		BE575F7426DB70E7007B4686 /* CollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */; };
 		BEF364A426DA54230030BB67 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A326DA54230030BB67 /* Constants.swift */; };
 		BEF364A726DA54540030BB67 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A626DA54540030BB67 /* Extensions.swift */; };
+		BEF364AB26DA90070030BB67 /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364AA26DA90070030BB67 /* Codables.swift */; };
+		BEF364AE26DAAE390030BB67 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364AD26DAAE390030BB67 /* RequestManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +30,12 @@
 		BE39F4E626D9035C00912C5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE39F4E926D9035C00912C5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE39F4EB26D9035C00912C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewManager.swift; sourceTree = "<group>"; };
 		BEF364A326DA54230030BB67 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BEF364A626DA54540030BB67 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BEF364AA26DA90070030BB67 /* Codables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codables.swift; sourceTree = "<group>"; };
+		BEF364AD26DAAE390030BB67 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +76,11 @@
 				BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */,
 				BE39F4EB26D9035C00912C5F /* Info.plist */,
 				BEF364A326DA54230030BB67 /* Constants.swift */,
+				BEF364AD26DAAE390030BB67 /* RequestManager.swift */,
 				BEF364A626DA54540030BB67 /* Extensions.swift */,
+				BEF364AA26DA90070030BB67 /* Codables.swift */,
+				BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */,
+				BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */,
 			);
 			path = CityWeather;
 			sourceTree = "<group>";
@@ -144,10 +156,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF364A726DA54540030BB67 /* Extensions.swift in Sources */,
+				BE575F7126DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift in Sources */,
 				BE39F4E226D9035600912C5F /* ViewController.swift in Sources */,
 				BE39F4DE26D9035600912C5F /* AppDelegate.swift in Sources */,
 				BE39F4E026D9035600912C5F /* SceneDelegate.swift in Sources */,
+				BEF364AE26DAAE390030BB67 /* RequestManager.swift in Sources */,
+				BEF364AB26DA90070030BB67 /* Codables.swift in Sources */,
 				BEF364A426DA54230030BB67 /* Constants.swift in Sources */,
+				BE575F7426DB70E7007B4686 /* CollectionViewManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
