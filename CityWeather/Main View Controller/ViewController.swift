@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
+class ViewController: UIViewController, CollectionViewHolder, RequestMaker, LocationButtonContaining {
     
     // MARK: - Outlets
 
@@ -28,11 +28,19 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
             goButton.addTarget(self, action: #selector(getCurrentWeatherConditions), for: .touchUpInside)
         }
     }
+    @IBOutlet var locationButton: UIButton! {
+        
+        didSet {
+            
+            locationButton.addTarget(self, action: #selector(getCurrentWeatherAtUserLocation(_:)), for: .touchUpInside)
+        }
+    }
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewParentEffectView: UIVisualEffectView!
     @IBOutlet var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var mapVisualEffectView: UIVisualEffectView!
     
     // MARK: - Overridden Properties
     
@@ -43,6 +51,7 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
     let formatter = DateFormatter.init()
     private lazy var collectionViewManager = CollectionViewManager.init(holder: self)
     private lazy var requestHandler = RequestHandler.init(maker: self)
+    private var locationManager = LocationManager.shared
     
     private var collectionViewHeight: CGFloat {
         
@@ -72,8 +81,12 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         
         super.viewDidLoad()
         
-        collectionViewParentEffectView.layer.cornerRadius = 14
-        mapView.layer.cornerRadius = 14
+        collectionViewParentEffectView.layer.cornerRadius = Constants.cornerRadius
+        mapView.layer.cornerRadius = Constants.cornerRadius
+        mapVisualEffectView.layer.cornerRadius = Constants.cornerRadius
+        mapVisualEffectView.effect = nil
+        
+        locationManager.buttonContaining = self
         
         textField.delegate = self
         
@@ -81,6 +94,7 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         prepareBackground()
         prepareNotifications()
         prepareCollectionViewHeight()
+        prepareLocationButton()
     }
     
     // MARK: - Preparation
@@ -103,6 +117,20 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
             $0?.contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? nil : UIColor.white.withAlphaComponent(0.4)
             $0?.effect = UIBlurEffect.init(style: traitCollection.isDarkMode ? .dark : .light)
         })
+    }
+    
+    func prepareLocationButton() {
+        
+        guard locationManager.city != nil else {
+            
+            locationButton.tintColor = .lightGray
+            locationButton.setImage(UIImage.init(systemName: "location"), for: .normal)
+            
+            return
+        }
+        
+        locationButton.tintColor = goButton.tintColor
+        locationButton.setImage(UIImage.init(systemName: "location.fill"), for: .normal)
     }
     
     func prepareCollectionViewHeight() {
@@ -161,6 +189,7 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         UIView.animate(withDuration: 0.3, animations: {
             
             self.collectionView.alpha = keyboardWillShow ? 0 : 1
+            self.mapVisualEffectView.effect = keyboardWillShow ? UIBlurEffect.init(style: self.traitCollection.isDarkMode ? .dark : .light) : nil
             self.view.layoutIfNeeded()
         })
     }
@@ -193,6 +222,35 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         present(alert, animated: true, completion: nil)
         
         requestHandler.getCoordinates(from: text, alert: alert)
+    }
+    
+    @objc func getCurrentWeatherAtUserLocation(_ sender: Any) {
+        
+        textField.resignFirstResponder()
+        
+        guard locationManager.authorisationStatus == .authorizedWhenInUse else {
+            
+            presentErrorAlert(title: "Location access is needed for this feature. You can turn this on in Settings")
+            
+            return
+        }
+        
+        guard let city = locationManager.city, let country = locationManager.country else {
+            
+            presentErrorAlert(title: "Your current location has not been obtained yet.")
+            
+            return
+        }
+        
+        let alert = requestAlert(title: "Getting Current Conditions...")
+        present(alert, animated: true, completion: nil)
+        
+        let text = city + ", " + country
+        textField.text = text
+        
+        let coordinate = CLLocationCoordinate2D.init(latitude: locationManager.location.coordinate.latitude, longitude: locationManager.location.coordinate.longitude)
+        
+        requestHandler.getCurrentWeatherConditions(from: coordinate, alert: alert, currentConditions: .init(coord: .init(lat: coordinate.latitude, lon: coordinate.longitude), name: text, timezone: TimeZone.current.secondsFromGMT()))
     }
 }
 

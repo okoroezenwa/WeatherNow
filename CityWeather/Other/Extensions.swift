@@ -129,3 +129,11 @@ extension CGFloat {
         return label.sizeThatFits(UIView.layoutFittingCompressedSize).height
     }
 }
+
+extension CLLocation {
+    
+    func fetchCityAndCountry(completion: @escaping (_ street: String?, _ city: String?, _ state:  String?, _ country: String?, _ error: Error?) -> ()) {
+        
+        CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in completion(placemarks?.first?.subAdministrativeArea, placemarks?.first?.locality, placemarks?.first?.administrativeArea, placemarks?.first?.country, error) }
+    }
+}

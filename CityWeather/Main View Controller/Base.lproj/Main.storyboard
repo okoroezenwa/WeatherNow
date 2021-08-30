@@ -74,6 +74,14 @@
                                     <constraint firstAttribute="height" constant="150" id="DPQ-Ix-vIA"/>
                                 </constraints>
                             </mapView>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gas-yy-W8h">
+                                <rect key="frame" x="16" y="418" width="382" height="150"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6Pu-rh-rud">
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="150"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0h-dA-4mP">
                                 <rect key="frame" x="16" y="598" width="382" height="184"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zz8-kh-vUQ">
@@ -204,31 +212,29 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zgh-UY-W3R">
-                                            <rect key="frame" x="16" y="0.0" width="398" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <subviews>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKZ-WU-KcZ">
-                                                    <rect key="frame" x="-56" y="0.0" width="56" height="50"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKZ-WU-KcZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="56" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="4JP-T9-SzR"/>
                                                     </constraints>
-                                                    <state key="normal" image="location.fill" catalog="system"/>
+                                                    <state key="normal" image="location" catalog="system"/>
                                                 </button>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Location or Zip Code" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4cP-eD-AZY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Location or Zip Code" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4cP-eD-AZY">
+                                                    <rect key="frame" x="64" y="0.0" width="286" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2A-Y6-CCW">
-                                                    <rect key="frame" x="342" y="0.0" width="56" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="56" id="OtO-7O-8gG"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="358" y="0.0" width="56" height="50"/>
                                                     <state key="normal" title="Go!"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XKZ-WU-KcZ" firstAttribute="width" secondItem="K2A-Y6-CCW" secondAttribute="width" id="LNf-8s-aaf"/>
                                                 <constraint firstAttribute="height" constant="50" id="gxh-Wy-cu2"/>
+                                                <constraint firstItem="K2A-Y6-CCW" firstAttribute="width" secondItem="XKZ-WU-KcZ" secondAttribute="width" id="yNn-Q0-tLA"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -239,7 +245,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="zgh-UY-W3R" firstAttribute="top" secondItem="kmF-TA-dKH" secondAttribute="top" id="Xga-3y-hhp"/>
-                                        <constraint firstItem="zgh-UY-W3R" firstAttribute="leading" secondItem="kmF-TA-dKH" secondAttribute="leading" constant="16" id="az6-tJ-Q2e"/>
+                                        <constraint firstItem="zgh-UY-W3R" firstAttribute="leading" secondItem="kmF-TA-dKH" secondAttribute="leading" id="az6-tJ-Q2e"/>
                                         <constraint firstAttribute="trailing" secondItem="zgh-UY-W3R" secondAttribute="trailing" id="n2c-jJ-WEl"/>
                                     </constraints>
                                 </view>
@@ -253,13 +259,16 @@
                             <constraint firstItem="at9-yN-as2" firstAttribute="leading" secondItem="Q0h-dA-4mP" secondAttribute="leading" id="9yd-Yk-ele"/>
                             <constraint firstAttribute="bottom" secondItem="CIm-oL-dTu" secondAttribute="bottom" id="ADT-T1-CmQ"/>
                             <constraint firstItem="qnk-33-BNy" firstAttribute="trailing" secondItem="Q0h-dA-4mP" secondAttribute="trailing" id="D2T-aX-qOo"/>
+                            <constraint firstItem="gas-yy-W8h" firstAttribute="trailing" secondItem="at9-yN-as2" secondAttribute="trailing" id="DCJ-5G-9ED"/>
                             <constraint firstItem="Q0h-dA-4mP" firstAttribute="top" secondItem="at9-yN-as2" secondAttribute="bottom" constant="30" id="E4t-I6-83O"/>
+                            <constraint firstItem="gas-yy-W8h" firstAttribute="bottom" secondItem="at9-yN-as2" secondAttribute="bottom" id="HZf-nc-2P3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zgh-UY-W3R" secondAttribute="bottom" id="ImU-fH-5PP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gzl-zj-Quv" secondAttribute="bottom" id="Iuv-QK-15X"/>
                             <constraint firstItem="TWr-EU-SYq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="JQf-3h-ZsT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CIm-oL-dTu" secondAttribute="trailing" id="Li8-nq-a69"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gzl-zj-Quv" secondAttribute="trailing" id="ZDb-4v-4SK"/>
                             <constraint firstItem="at9-yN-as2" firstAttribute="trailing" secondItem="Q0h-dA-4mP" secondAttribute="trailing" id="Zv3-cc-1Mz"/>
+                            <constraint firstItem="gas-yy-W8h" firstAttribute="top" secondItem="at9-yN-as2" secondAttribute="top" id="bft-QI-3nV"/>
                             <constraint firstItem="at9-yN-as2" firstAttribute="top" secondItem="qnk-33-BNy" secondAttribute="bottom" constant="30" id="cH4-xi-hKl"/>
                             <constraint firstItem="Gzl-zj-Quv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eq6-uy-g6X"/>
                             <constraint firstItem="Gzl-zj-Quv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ijy-4A-rHW"/>
@@ -267,6 +276,7 @@
                             <constraint firstItem="CIm-oL-dTu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lVo-x9-B5B"/>
                             <constraint firstItem="iTV-5f-17r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pvr-BZ-rl2"/>
                             <constraint firstItem="Q0h-dA-4mP" firstAttribute="leading" secondItem="CIm-oL-dTu" secondAttribute="leading" constant="16" id="pzY-Sj-L7B"/>
+                            <constraint firstItem="gas-yy-W8h" firstAttribute="leading" secondItem="at9-yN-as2" secondAttribute="leading" id="tBp-RS-Hvm"/>
                             <constraint firstItem="CIm-oL-dTu" firstAttribute="top" secondItem="Q0h-dA-4mP" secondAttribute="bottom" constant="30" id="tG9-W8-KrQ"/>
                             <constraint firstItem="iTV-5f-17r" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="tvd-SW-FBS"/>
                             <constraint firstAttribute="bottom" secondItem="iTV-5f-17r" secondAttribute="bottom" id="uiz-H9-X8p"/>
@@ -286,9 +296,11 @@
                         <outlet property="dateAndTimeLabel" destination="yt2-ft-VL9" id="hk2-OI-96Z"/>
                         <outlet property="feelsLikeLabel" destination="rkn-ct-sPl" id="KUc-6Q-8Ke"/>
                         <outlet property="goButton" destination="K2A-Y6-CCW" id="BdR-VX-pd7"/>
+                        <outlet property="locationButton" destination="XKZ-WU-KcZ" id="zJI-J0-zE0"/>
                         <outlet property="locationLabel" destination="8yV-nK-ikS" id="9XI-hG-O0Y"/>
                         <outlet property="mapView" destination="at9-yN-as2" id="08H-lH-UwE"/>
                         <outlet property="mapViewHeightConstraint" destination="DPQ-Ix-vIA" id="JfB-ac-VXm"/>
+                        <outlet property="mapVisualEffectView" destination="gas-yy-W8h" id="ti4-L5-PK3"/>
                         <outlet property="textField" destination="4cP-eD-AZY" id="eEk-fZ-Uad"/>
                         <outlet property="weatherLabel" destination="9VQ-gp-twS" id="jPD-vb-DKf"/>
                     </connections>
@@ -299,7 +311,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="location.fill" catalog="system" width="128" height="121"/>
+        <image name="location" catalog="system" width="128" height="121"/>
         <namedColor name="Color">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -9,6 +9,7 @@ import UIKit
 
 struct Constants {
     
+    static var cornerRadius = 14 as CGFloat
     static var margin = 16 as CGFloat
     static var stackViewLabelSpacing = 4 as CGFloat
     static var collectionViewVerticalInset = 16 as CGFloat

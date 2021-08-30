@@ -115,7 +115,7 @@ class RequestHandler {
                     do {
                         
                         let errorObject = try JSONDecoder.init().decode(RequestError.self, from: data)
-                        
+                        print("yo")
                         weakSelf.requestMaker?.presentErrorAlert(title: errorObject.message)
                         
                     } catch let error {

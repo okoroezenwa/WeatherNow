@@ -15,7 +15,7 @@
 		BE39F4EA26D9035C00912C5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */; };
 		BE575F7126DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */; };
 		BE575F7426DB70E7007B4686 /* CollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */; };
-		BE575F8126DCAC93007B4686 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F8026DCAC93007B4686 /* LocationManager.swift */; };
+		BE575F9326DCB918007B4686 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F9226DCB917007B4686 /* LocationManager.swift */; };
 		BEF364A426DA54230030BB67 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A326DA54230030BB67 /* Constants.swift */; };
 		BEF364A726DA54540030BB67 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A626DA54540030BB67 /* Extensions.swift */; };
 		BEF364AB26DA90070030BB67 /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364AA26DA90070030BB67 /* Codables.swift */; };
@@ -33,7 +33,7 @@
 		BE39F4EB26D9035C00912C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewManager.swift; sourceTree = "<group>"; };
-		BE575F8026DCAC93007B4686 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		BE575F9226DCB917007B4686 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		BEF364A326DA54230030BB67 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BEF364A626DA54540030BB67 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BEF364AA26DA90070030BB67 /* Codables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codables.swift; sourceTree = "<group>"; };
@@ -113,9 +113,9 @@
 		BE575F7D26DCAC68007B4686 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				BE575F9226DCB917007B4686 /* LocationManager.swift */,
 				BEF364AD26DAAE390030BB67 /* RequestManager.swift */,
 				BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */,
-				BE575F8026DCAC93007B4686 /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			files = (
 				BEF364A726DA54540030BB67 /* Extensions.swift in Sources */,
 				BE575F7126DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift in Sources */,
-				BE575F8126DCAC93007B4686 /* LocationManager.swift in Sources */,
+				BE575F9326DCB918007B4686 /* LocationManager.swift in Sources */,
 				BE39F4E226D9035600912C5F /* ViewController.swift in Sources */,
 				BE39F4DE26D9035600912C5F /* AppDelegate.swift in Sources */,
 				BE39F4E026D9035600912C5F /* SceneDelegate.swift in Sources */,
