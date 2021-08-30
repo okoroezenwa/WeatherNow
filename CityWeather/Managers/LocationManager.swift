@@ -6,8 +6,9 @@
 //  Copyright © 2021 Sistem. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
+import MapKit
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
@@ -25,6 +26,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         manager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
+    lazy var results = [MKLocalSearchCompletion]()
     let manager: CLLocationManager
     var authorisationStatus: CLAuthorizationStatus
     var location = CLLocation.init(latitude: 0, longitude: 0) {
@@ -45,13 +47,22 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         didSet {
             
-            buttonContaining?.prepareLocationButton()
+            locationPresenter?.prepareLocationButton()
         }
     }
     var state: String?
     var country: String?
     
-    weak var buttonContaining: LocationButtonContaining?
+    weak var locationPresenter: LocationButtonContaining?
+    
+    lazy var searchCompleter: MKLocalSearchCompleter = {
+        
+        let completer = MKLocalSearchCompleter()
+        completer.delegate = self
+        completer.resultTypes = [.address]
+
+        return completer
+    }()
     
     //MARK: CLLocationManager Delegate methods
     
@@ -88,4 +99,42 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 protocol LocationButtonContaining: AnyObject {
     
     func prepareLocationButton()
+    func updateTableView()
+    func getConditionsForResult(_ result: MKLocalSearchCompletion)
+}
+
+extension LocationManager: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        results.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        let object = results[indexPath.row]
+        cell.textLabel?.text = object.title
+        cell.detailTextLabel?.text = object.subtitle
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let result = results[indexPath.row]
+        locationPresenter?.getConditionsForResult(result)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension LocationManager: MKLocalSearchCompleterDelegate {
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        
+        results = completer.results
+        locationPresenter?.updateTableView()
+    }
 }

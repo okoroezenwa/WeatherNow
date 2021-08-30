@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, CollectionViewHolder, RequestMaker, LocationButtonContaining {
+class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
     
     // MARK: - Outlets
 
@@ -41,6 +41,9 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var mapViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var mapVisualEffectView: UIVisualEffectView!
+    @IBOutlet var searchResultsVisualEffectView: UIVisualEffectView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var tableView: UITableView!
     
     // MARK: - Overridden Properties
     
@@ -81,16 +84,18 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
         
         super.viewDidLoad()
         
-        collectionViewParentEffectView.layer.cornerRadius = Constants.cornerRadius
-        mapView.layer.cornerRadius = Constants.cornerRadius
-        mapVisualEffectView.layer.cornerRadius = Constants.cornerRadius
+        prepareCornerRadii()
+        
+        searchResultsVisualEffectView.alpha = 0
         mapVisualEffectView.effect = nil
         
-        locationManager.buttonContaining = self
+        locationManager.locationPresenter = self
+        tableView.delegate = locationManager
+        tableView.dataSource = locationManager
         
         textField.delegate = self
         
-        prepareVisualEffectView()
+        prepareVisualEffectViews()
         prepareBackground()
         prepareNotifications()
         prepareCollectionViewHeight()
@@ -99,10 +104,16 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
     
     // MARK: - Preparation
     
+    private func prepareCornerRadii() {
+        
+        [collectionViewParentEffectView, mapView, mapVisualEffectView, searchResultsVisualEffectView].forEach({ $0?.layer.cornerRadius = Constants.cornerRadius })
+    }
+    
     private func prepareNotifications() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard(with:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard(with:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textDidChange(_:)), name: UITextField.textDidChangeNotification, object: textField)
     }
     
     private func prepareBackground() {
@@ -110,9 +121,9 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
         backgroundImageView.image = #imageLiteral(resourceName: traitCollection.isDarkMode ? "Dark" : "Light")
     }
     
-    private func prepareVisualEffectView() {
+    private func prepareVisualEffectViews() {
         
-        [bottomEffectView, collectionViewParentEffectView].forEach({
+        [bottomEffectView, collectionViewParentEffectView, searchResultsVisualEffectView].forEach({
             
             $0?.contentView.backgroundColor = traitCollection.userInterfaceStyle == .dark ? nil : UIColor.white.withAlphaComponent(0.4)
             $0?.effect = UIBlurEffect.init(style: traitCollection.isDarkMode ? .dark : .light)
@@ -174,7 +185,7 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
         mapView.setCenter(coordinate, animated: true)
     }
     
-    // MARK: - Responding to System Changes
+    // MARK: - Responding to Changes
     
     @objc private func adjustKeyboard(with notification: Notification) {
         
@@ -185,9 +196,11 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
         bottomEffectViewBottomConstraint.constant = keyboardWillShow ? keyboardHeightAtEnd : 0
         collectionViewHeightConstraint.constant = keyboardWillShow ? 0 : collectionViewHeight
         mapViewHeightConstraint.constant = keyboardWillShow ? 60 : Constants.mapViewHeight
+        searchResultsVisualEffectView.isUserInteractionEnabled = keyboardWillShow
         
         UIView.animate(withDuration: 0.3, animations: {
             
+            self.searchResultsVisualEffectView.alpha = keyboardWillShow ? 1 : 0
             self.collectionView.alpha = keyboardWillShow ? 0 : 1
             self.mapVisualEffectView.effect = keyboardWillShow ? UIBlurEffect.init(style: self.traitCollection.isDarkMode ? .dark : .light) : nil
             self.view.layoutIfNeeded()
@@ -201,8 +214,14 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker, Loca
         if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
             
             prepareBackground()
-            prepareVisualEffectView()
+            prepareVisualEffectViews()
         }
+    }
+    
+    @objc func textDidChange(_ notification: Notification) {
+        
+        locationManager.searchCompleter.queryFragment = textField.text ?? ""
+        activityIndicator.startAnimating()
     }
     
     // MARK: - The Weather
@@ -261,5 +280,21 @@ extension ViewController: UITextFieldDelegate {
         getCurrentWeatherConditions()
         
         return true
+    }
+}
+
+extension ViewController: LocationButtonContaining {
+    
+    func getConditionsForResult(_ result: MKLocalSearchCompletion) {
+        
+        textField.text = result.title + ", " + result.subtitle
+        
+        getCurrentWeatherConditions()
+    }
+    
+    func updateTableView() {
+        
+        tableView.reloadData()
+        activityIndicator.stopAnimating()
     }
 }
