@@ -15,6 +15,7 @@
 		BE39F4EA26D9035C00912C5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */; };
 		BE575F7126DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */; };
 		BE575F7426DB70E7007B4686 /* CollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */; };
+		BE575F8126DCAC93007B4686 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE575F8026DCAC93007B4686 /* LocationManager.swift */; };
 		BEF364A426DA54230030BB67 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A326DA54230030BB67 /* Constants.swift */; };
 		BEF364A726DA54540030BB67 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364A626DA54540030BB67 /* Extensions.swift */; };
 		BEF364AB26DA90070030BB67 /* Codables.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF364AA26DA90070030BB67 /* Codables.swift */; };
@@ -32,6 +33,7 @@
 		BE39F4EB26D9035C00912C5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConditionCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewManager.swift; sourceTree = "<group>"; };
+		BE575F8026DCAC93007B4686 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		BEF364A326DA54230030BB67 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BEF364A626DA54540030BB67 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BEF364AA26DA90070030BB67 /* Codables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codables.swift; sourceTree = "<group>"; };
@@ -68,21 +70,62 @@
 		BE39F4DC26D9035600912C5F /* CityWeather */ = {
 			isa = PBXGroup;
 			children = (
-				BE39F4DD26D9035600912C5F /* AppDelegate.swift */,
-				BE39F4DF26D9035600912C5F /* SceneDelegate.swift */,
-				BE39F4E126D9035600912C5F /* ViewController.swift */,
-				BE39F4E326D9035600912C5F /* Main.storyboard */,
+				BE575F7626DCA424007B4686 /* Delegates */,
+				BE575F7826DCA44B007B4686 /* Main View Controller */,
 				BE39F4E626D9035C00912C5F /* Assets.xcassets */,
 				BE39F4E826D9035C00912C5F /* LaunchScreen.storyboard */,
-				BE39F4EB26D9035C00912C5F /* Info.plist */,
-				BEF364A326DA54230030BB67 /* Constants.swift */,
-				BEF364AD26DAAE390030BB67 /* RequestManager.swift */,
-				BEF364A626DA54540030BB67 /* Extensions.swift */,
-				BEF364AA26DA90070030BB67 /* Codables.swift */,
-				BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */,
-				BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */,
+				BE575F7A26DCAC54007B4686 /* Other */,
+				BE575F7D26DCAC68007B4686 /* Managers */,
+				BE575F7F26DCAC71007B4686 /* Cells */,
 			);
 			path = CityWeather;
+			sourceTree = "<group>";
+		};
+		BE575F7626DCA424007B4686 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				BE39F4DD26D9035600912C5F /* AppDelegate.swift */,
+				BE39F4DF26D9035600912C5F /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		BE575F7826DCA44B007B4686 /* Main View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BE39F4E126D9035600912C5F /* ViewController.swift */,
+				BE39F4E326D9035600912C5F /* Main.storyboard */,
+			);
+			path = "Main View Controller";
+			sourceTree = "<group>";
+		};
+		BE575F7A26DCAC54007B4686 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				BE39F4EB26D9035C00912C5F /* Info.plist */,
+				BEF364A326DA54230030BB67 /* Constants.swift */,
+				BEF364A626DA54540030BB67 /* Extensions.swift */,
+				BEF364AA26DA90070030BB67 /* Codables.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		BE575F7D26DCAC68007B4686 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BEF364AD26DAAE390030BB67 /* RequestManager.swift */,
+				BE575F7326DB70E7007B4686 /* CollectionViewManager.swift */,
+				BE575F8026DCAC93007B4686 /* LocationManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		BE575F7F26DCAC71007B4686 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BE575F7026DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +200,7 @@
 			files = (
 				BEF364A726DA54540030BB67 /* Extensions.swift in Sources */,
 				BE575F7126DB6F31007B4686 /* WeatherConditionCollectionViewCell.swift in Sources */,
+				BE575F8126DCAC93007B4686 /* LocationManager.swift in Sources */,
 				BE39F4E226D9035600912C5F /* ViewController.swift in Sources */,
 				BE39F4DE26D9035600912C5F /* AppDelegate.swift in Sources */,
 				BE39F4E026D9035600912C5F /* SceneDelegate.swift in Sources */,
@@ -312,7 +356,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P75398C8MB;
-				INFOPLIST_FILE = CityWeather/Info.plist;
+				INFOPLIST_FILE = CityWeather/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -331,7 +375,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P75398C8MB;
-				INFOPLIST_FILE = CityWeather/Info.plist;
+				INFOPLIST_FILE = CityWeather/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
     
@@ -30,6 +31,8 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionViewParentEffectView: UIVisualEffectView!
     @IBOutlet var collectionViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var mapView: MKMapView!
+    @IBOutlet var mapViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Overridden Properties
     
@@ -53,6 +56,16 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
             + Constants.collectionViewVerticalInset
     }
     
+    private var currentAnnotation: MKAnnotation? {
+        
+        didSet {
+            
+            guard let oldAnnotation = oldValue else { return }
+            
+            mapView.removeAnnotation(oldAnnotation)
+        }
+    }
+    
     // MARK: - Functions
     
     override func viewDidLoad() {
@@ -60,26 +73,30 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         super.viewDidLoad()
         
         collectionViewParentEffectView.layer.cornerRadius = 14
+        mapView.layer.cornerRadius = 14
         
         textField.delegate = self
         
         prepareVisualEffectView()
         prepareBackground()
         prepareNotifications()
+        prepareCollectionViewHeight()
     }
     
-    func prepareNotifications() {
+    // MARK: - Preparation
+    
+    private func prepareNotifications() {
         
         NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard(with:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard(with:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    func prepareBackground() {
+    private func prepareBackground() {
         
         backgroundImageView.image = #imageLiteral(resourceName: traitCollection.isDarkMode ? "Dark" : "Light")
     }
     
-    func prepareVisualEffectView() {
+    private func prepareVisualEffectView() {
         
         [bottomEffectView, collectionViewParentEffectView].forEach({
             
@@ -88,37 +105,58 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         })
     }
     
+    func prepareCollectionViewHeight() {
+        
+        collectionViewHeightConstraint.constant = collectionViewHeight
+    }
+    
     func prepareCollectionView(with response: Response) {
         
         weatherLabel.text = .init(format: "%.1f", response.current.temperature) + "°F"
         feelsLikeLabel.text = "Feels like \(String.init(format: "%.1f", response.current.feelsLike))°F"
         locationLabel.text = response.name
         conditionLabel.text = response.current.weather.first?.title ?? "—"
-        dateAndTimeLabel.text = formatter.withFormat(.preferredDateFormat).string(from: Date.init(timeIntervalSince1970: TimeInterval(response.current.unixTime)))
-        print(response.timezoneOffset)
+        
+        // uses the timezone information from the API to determine the current time for the location returned. Since Date calculations with Unix time always incorporate the current device timezone, we need to remove that to get the right result.
+        dateAndTimeLabel.text = formatter.withFormat(.preferredDateFormat).string(from: Date.init(timeIntervalSince1970: TimeInterval(response.current.unixTime + response.timezoneOffset - TimeZone.current.secondsFromGMT())))
+        
         collectionViewManager.conditions = [
             
-            .init(title: "Humidity", details: "\(response.current.humidity)"),
+            .init(title: "Humidity", details: "\(response.current.humidity)%"),
             .init(title: "Pressure (hPa)", details: "\(response.current.pressure)"),
             .init(title: "UV Index", details: "\(response.current.uvIndex)"),
             .init(title: "Cloudiness", details: "\(response.current.clouds)%"),
             .init(title: "Wind (m/h)", details: "\(response.current.windSpeed)"),
-            .init(title: "Precipitation (%)", details: "\(String.init(format: "%.1f", response.minutely?.first(where: { Double($0.unixTime + response.timezoneOffset) > Date.init().timeIntervalSince1970 })?.precipitation ?? 0))mm")
+            .init(title: "Precipitation (mm)", details: "\(String.init(format: "%.1f", response.minutely?.first(where: { Double($0.unixTime + response.timezoneOffset) > Date.init().timeIntervalSince1970 })?.precipitation ?? 0))")
         ]
         
-        collectionViewHeightConstraint.constant = collectionViewHeight
+        prepareCollectionViewHeight()
+        updateMapView(to: .init(latitude: response.latitude, longitude: response.longitude))
         
         UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
     }
     
-    @objc func adjustKeyboard(with notification: Notification) {
+    func updateMapView(to coordinate: CLLocationCoordinate2D) {
+        
+        let annotation = MKPointAnnotation()
+        annotation.title = title
+        annotation.coordinate = coordinate
+        currentAnnotation = annotation
+        mapView.addAnnotation(annotation)
+        mapView.setCenter(coordinate, animated: true)
+    }
+    
+    // MARK: - Responding to System Changes
+    
+    @objc private func adjustKeyboard(with notification: Notification) {
         
         guard let keyboardHeightAtEnd = ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height else { return }
         
         let keyboardWillShow = notification.name == UIResponder.keyboardWillShowNotification
             
         bottomEffectViewBottomConstraint.constant = keyboardWillShow ? keyboardHeightAtEnd : 0
-        collectionViewHeightConstraint.constant = keyboardWillShow ? 50 : collectionViewHeight
+        collectionViewHeightConstraint.constant = keyboardWillShow ? 0 : collectionViewHeight
+        mapViewHeightConstraint.constant = keyboardWillShow ? 60 : Constants.mapViewHeight
         
         UIView.animate(withDuration: 0.3, animations: {
             
@@ -138,7 +176,9 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         }
     }
     
-    @objc func getCurrentWeatherConditions() {
+    // MARK: - The Weather
+    
+    @objc private func getCurrentWeatherConditions() {
         
         guard let text = textField.text else {
             
@@ -150,7 +190,6 @@ class ViewController: UIViewController, CollectionViewHolder, RequestMaker {
         textField.resignFirstResponder()
         
         let alert = requestAlert(title: "Getting Current Conditions...")
-        
         present(alert, animated: true, completion: nil)
         
         requestHandler.getCoordinates(from: text, alert: alert)

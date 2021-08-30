@@ -18,9 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iTV-5f-17r">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="Gzl-zj-Quv">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
@@ -38,11 +35,14 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="wnx-8Y-opO"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="5eO-wM-IkZ"/>
                             </scrollView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iTV-5f-17r">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnk-33-BNy">
-                                <rect key="frame" x="16" y="74" width="382" height="494"/>
+                                <rect key="frame" x="16" y="74" width="382" height="314"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QSn-hc-9Cn">
-                                        <rect key="frame" x="0.0" y="201" width="382" height="92.5"/>
+                                        <rect key="frame" x="0.0" y="111" width="382" height="92.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="999" text="--°F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VQ-gp-twS">
                                                 <rect key="frame" x="134" y="0.0" width="114" height="72"/>
@@ -68,6 +68,12 @@
                                     <constraint firstItem="QSn-hc-9Cn" firstAttribute="leading" secondItem="qnk-33-BNy" secondAttribute="leading" id="xW9-z3-AVv"/>
                                 </constraints>
                             </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="at9-yN-as2">
+                                <rect key="frame" x="16" y="418" width="382" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="DPQ-Ix-vIA"/>
+                                </constraints>
+                            </mapView>
                             <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0h-dA-4mP">
                                 <rect key="frame" x="16" y="598" width="382" height="184"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Zz8-kh-vUQ">
@@ -205,7 +211,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="4JP-T9-SzR"/>
                                                     </constraints>
-                                                    <state key="normal" image="Location"/>
+                                                    <state key="normal" image="location.fill" catalog="system"/>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Location or Zip Code" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4cP-eD-AZY">
                                                     <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
@@ -244,14 +250,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qnk-33-BNy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="17g-4U-TaI"/>
-                            <constraint firstItem="Q0h-dA-4mP" firstAttribute="top" secondItem="qnk-33-BNy" secondAttribute="bottom" constant="30" id="8wX-yt-UNw"/>
+                            <constraint firstItem="at9-yN-as2" firstAttribute="leading" secondItem="Q0h-dA-4mP" secondAttribute="leading" id="9yd-Yk-ele"/>
                             <constraint firstAttribute="bottom" secondItem="CIm-oL-dTu" secondAttribute="bottom" id="ADT-T1-CmQ"/>
                             <constraint firstItem="qnk-33-BNy" firstAttribute="trailing" secondItem="Q0h-dA-4mP" secondAttribute="trailing" id="D2T-aX-qOo"/>
+                            <constraint firstItem="Q0h-dA-4mP" firstAttribute="top" secondItem="at9-yN-as2" secondAttribute="bottom" constant="30" id="E4t-I6-83O"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zgh-UY-W3R" secondAttribute="bottom" id="ImU-fH-5PP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Gzl-zj-Quv" secondAttribute="bottom" id="Iuv-QK-15X"/>
                             <constraint firstItem="TWr-EU-SYq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="JQf-3h-ZsT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CIm-oL-dTu" secondAttribute="trailing" id="Li8-nq-a69"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gzl-zj-Quv" secondAttribute="trailing" id="ZDb-4v-4SK"/>
+                            <constraint firstItem="at9-yN-as2" firstAttribute="trailing" secondItem="Q0h-dA-4mP" secondAttribute="trailing" id="Zv3-cc-1Mz"/>
+                            <constraint firstItem="at9-yN-as2" firstAttribute="top" secondItem="qnk-33-BNy" secondAttribute="bottom" constant="30" id="cH4-xi-hKl"/>
                             <constraint firstItem="Gzl-zj-Quv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eq6-uy-g6X"/>
                             <constraint firstItem="Gzl-zj-Quv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ijy-4A-rHW"/>
                             <constraint firstItem="TWr-EU-SYq" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="irs-Eh-gje"/>
@@ -278,17 +287,19 @@
                         <outlet property="feelsLikeLabel" destination="rkn-ct-sPl" id="KUc-6Q-8Ke"/>
                         <outlet property="goButton" destination="K2A-Y6-CCW" id="BdR-VX-pd7"/>
                         <outlet property="locationLabel" destination="8yV-nK-ikS" id="9XI-hG-O0Y"/>
+                        <outlet property="mapView" destination="at9-yN-as2" id="08H-lH-UwE"/>
+                        <outlet property="mapViewHeightConstraint" destination="DPQ-Ix-vIA" id="JfB-ac-VXm"/>
                         <outlet property="textField" destination="4cP-eD-AZY" id="eEk-fZ-Uad"/>
                         <outlet property="weatherLabel" destination="9VQ-gp-twS" id="jPD-vb-DKf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="141" y="87"/>
+            <point key="canvasLocation" x="140.57971014492756" y="86.383928571428569"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Location" width="22" height="22"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
         <namedColor name="Color">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.050000000000000003" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

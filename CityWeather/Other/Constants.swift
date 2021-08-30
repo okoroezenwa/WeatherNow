@@ -15,4 +15,5 @@ struct Constants {
     static var conditionTitleLabelFontSize = 20 as CGFloat
     static var conditionDetailLabelFontSize = 13 as CGFloat
     static var numberOfItemsInARow = 3
+    static var mapViewHeight = 150 as CGFloat
 }
